@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import ProductItem from '../components/productItem';
 import {Typography} from '../components/Typography';
 import Colors from '../utils/colors';
@@ -18,6 +19,26 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [Data, setData] = useState<Product[]>([]);
   const [limit, setLimit] = useState(12);
   const [loading, setLoading] = useState(true);
+
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userString = await AsyncStorage.getItem('user');
+
+        if (userString) {
+          const user: UserInfo = JSON.parse(userString);
+          setUserInfo(user);
+        }
+      } catch (error) {
+        console.warn('Unable to fetch user information:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, [userInfo]);
+
 
   useEffect(() => {
     fetchData();
@@ -92,6 +113,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           <Typography variant="body">Loading...</Typography>
         </View>
       )}
+      {userInfo ? 
       <TouchableOpacity
         onPress={()=>{
           navigation.navigate("AddProduct", undefined)
@@ -99,6 +121,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         style={{position: 'absolute', end: 0, bottom: 0, margin: 16, backgroundColor: Colors.primary, width: 64,height: 64, borderRadius: 32, justifyContent: "center", alignItems: "center"}}>
         <Text style={{fontSize: 40, color: Colors.white, textAlignVertical: "center"}}>+</Text>
       </TouchableOpacity>
+      : null }
     </View>
   );
 };

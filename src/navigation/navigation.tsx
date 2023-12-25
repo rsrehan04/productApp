@@ -40,7 +40,7 @@ const App = () => (
             iconName = 'home';
           } else if (route.name === 'Search') {
             iconName = 'search';
-          } else if (route.name === 'User') {
+          } else if (route.name === 'Account') {
             iconName = 'user';
           }
           return <FontAwesome name={iconName} size={size} color={color} />;
@@ -53,7 +53,7 @@ const App = () => (
           SearchScreen as React.FC
         }
       />
-      <Tab.Screen name="User" component={UserScreen as React.FC} />
+      <Tab.Screen name="Account" component={UserScreen as React.FC} />
     </Tab.Navigator>
   </NavigationContainer>
 );

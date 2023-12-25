@@ -9,7 +9,7 @@ export type RootStackParamList = {
   };
   AddProduct: undefined;
   SearchProduct: undefined;
-  User: undefined;
+  Account: undefined;
 };
 
 
@@ -26,6 +26,6 @@ export type HomeScreenProps = ScreenProps<RootStackParamList, 'Home'>;
 export type ProductDetailcreenSProps = ScreenProps<RootStackParamList, 'ProductDetail'>;
 export type AddProductScreenProps = ScreenProps<RootStackParamList, 'AddProduct'>;
 export type SearchProductScreenProps = ScreenProps<RootStackParamList, 'SearchProduct'>;
-export type UserScreenProps = ScreenProps<RootStackParamList, 'User'>;
+export type UserScreenProps = ScreenProps<RootStackParamList, 'Account'>;
 
 

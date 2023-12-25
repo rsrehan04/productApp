@@ -84,9 +84,6 @@ interface InfoRowProps {
 const InfoRow: React.FC<InfoRowProps> = ({icon, label, value}) => (
   <View style={styles.row}>
     {icon}
-    {/* <Typography variant="subheading" style={styles.label}>
-      {label}
-    </Typography> */}
     <Typography variant="body" style={styles.labelValueContainer}>{value}</Typography>
     
   </View>
