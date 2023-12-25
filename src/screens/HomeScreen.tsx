@@ -8,12 +8,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import ProductItem from '../components/productItem';
+import ProductItem from '../components/ProductItem';
 import {Typography} from '../components/Typography';
 import Colors from '../utils/colors';
 import DimensionsConfig from '../utils/dimens';
 import { HomeScreenProps } from '../navigation/NavigationTypes';
 import { Product } from '../types/product';
+import { UserInfo } from '../types/user';
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [Data, setData] = useState<Product[]>([]);
@@ -22,32 +23,30 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const userString = await AsyncStorage.getItem('user');
-
-        if (userString) {
-          const user: UserInfo = JSON.parse(userString);
-          setUserInfo(user);
-        }
-      } catch (error) {
-        console.warn('Unable to fetch user information:', error);
-      }
-    };
-
-    fetchUserInfo();
-  }, [userInfo]);
-
 
   useEffect(() => {
     fetchData();
+    fetchUserInfo();
+
   }, []);
 
+  const fetchUserInfo = async () => {
+    try {
+      const userString = await AsyncStorage.getItem('user');
+
+      if (userString) {
+        const user: UserInfo = await JSON.parse(userString);
+        setUserInfo(user);
+      }
+    } catch (error) {
+      console.warn('Unable to fetch user information:', error);
+    }
+  };
+
   const fetchData = async () => {
+    console.log("OnPress")
     setLoading(true);
     try {
-      console.log('limit', limit);
       const response = await fetch(
         'https://dummyjson.com/products?limit=' + limit,
       );
@@ -76,7 +75,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={fetchData}
-          disabled={Data.length >= 100}
+          // disabled={Data.length >= 100}
           style={[
             styles.loadMoreBtn,
             {backgroundColor: Data.length >= 100 ? Colors.primaryDisabled : Colors.primary},

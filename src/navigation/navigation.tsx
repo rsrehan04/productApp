@@ -1,4 +1,5 @@
 import React from 'react';
+import {LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -8,6 +9,9 @@ import SearchScreen from '../screens/SearchProductScreen';
 import UserScreen from '../screens/UserScreen';
 import ProductDetail from '../screens/ProductDetail';
 import AddProduct from '../screens/AddProductScreen';
+
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -23,8 +27,8 @@ const HomeStack = () => (
         headerShown: false,
       }}
     />
-    <Stack.Screen name="Product" component={ProductDetail as React.FC} />
-    <Stack.Screen name="Add Product" component={AddProduct as React.FC} />
+    <Stack.Screen name="ProductDetail" component={ProductDetail as React.FC} />
+    <Stack.Screen name="AddProduct" component={AddProduct as React.FC} />
   </Stack.Navigator>
 );
 

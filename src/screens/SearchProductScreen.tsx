@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList} from 'react-native';
-import ProductItem from '../components/productItem';
+import ProductItem from '../components/ProductItem';
 import { CustomTextInput } from '../components/TextInput';
 import { SearchProductScreenProps } from '../navigation/NavigationTypes';
 import { Product } from '../types/product';

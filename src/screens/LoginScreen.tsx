@@ -8,6 +8,7 @@ import {CustomTextInput} from '../components/TextInput';
 import {Button} from '../components/Button';
 import DimensionsConfig from '../utils/dimens';
 import Strings from '../utils/strings';
+import { UserInfo } from '../types/user';
 
 const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState('');
